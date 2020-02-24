@@ -1,4 +1,9 @@
-# Python_search_engine
+# Python_search\_engine
+
+
+This search engine is a vertical search engine targeted at the field of technology blogs.
+
+Use MongoDB as the database.
 
 - [x] Search engine architecture
 
