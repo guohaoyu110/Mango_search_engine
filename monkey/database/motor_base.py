@@ -5,6 +5,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from monkey.config import config
 
 from monkey.utils.tools import singleton
+# 这句的意思是启动单例模式，防止重复初始化MongoDB导致占用过多的资源
 
 @singleton
 class MotorBase:
