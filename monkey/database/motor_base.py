@@ -30,6 +30,7 @@ class MotorBase:
             port = self.MONGODB['MONGO_PORT'] if self.MONGODB['MONGO_PORT'] else 27017,
             database = db)
         return AsyncIOMotorClient(self.motor_uri, io_loop=self.loop)
+    
     def get_db(self, db = MONGODB['DATABASE']):
         '''
         Get a db instance
