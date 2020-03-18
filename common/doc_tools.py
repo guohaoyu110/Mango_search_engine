@@ -12,14 +12,20 @@ mongo_db = MotorBase().get_db()
 stop_words = gen_stop_words()
 
 def elias_gamma_encode(X: int) -> str:
+    '''
+    Elias Gamma 算法对倒排列表的文档数值之差进行编码压缩
+    '''
     e = int(math.log(X,2))
     d = int(X - math.pow(2,e))
     unary_code = '1'*e +'0'
     binary_d = bin(d).replace('0b','')
-    binary_code = ('0'*e)[0:(e - len(binary_d))] + bianry_d  
+    binary_code = ('0'*e)[0:(e - len(binary_d))] + binary_d  
     return f"{unary_code}:{binary_code}"
 
 def elias_gammma_decode(el_str: str) -> int:
+    """
+    elias gamma算法对倒排列表的文档数值之差进行解码
+    """
     unary_code, binary_code = el_str.split(':')
     e = len(unary_code) - 1
     d = int(binary_code, 2)

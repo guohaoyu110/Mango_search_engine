@@ -35,3 +35,5 @@ def text_seg(text: str, stop_words: list = None) -> list:
 
 if __name__ == '__main__':
     print(text_seg('乔布斯的管理课'))
+# 其中停用词“的”已经被过滤掉，借用结巴分词库，我们很迅速就完成了分词的操作，步骤很简单，最后别忘了
+# 退出ipython以进行接下来的操作。
