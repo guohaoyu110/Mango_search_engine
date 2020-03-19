@@ -31,15 +31,32 @@ async def template(tpl, **kwargs):
 
 # @bp_home.route('/')
 async def index(request):
-    return text('index')
+    return await template('index.html')
+    #return text('index')
 
 # @bp_home.route('/search')
 async def index(request):
     query = str(request.args.get('q','')).strip()
     if query:
-        mongo_db = request.app.mongo_db
-        result = await doc_search(query=query, mongo_db=mongo_db)
-        return await template('search.html', title=query, result=result)
+        cache_result = await request.app.cache.get(query)
+        if cache_result:
+            # 如果存在缓存
+            result = cache_result
+        else:
+            # 不存在则去数据库查找
+            mongo_db = request.app.mongo_db
+            result = await doc_search(query=query, mongo_db=mongo_db)
+            await request.app.cache.set(query, result)
+        # 为了能够看出加了缓存后查询时间的差异，小数点向后移动到6位
+        time_cost = float('%.6f' % (time.time() - start))
+        return await template(
+            'search.html',
+            title=query,
+            result=result,
+            count=len(result),
+            time_cost=time_cost
+        )
+        # return await template('search.html', title=query, result=result)
     else:
         return await template('index.html')
     #return json(result)
