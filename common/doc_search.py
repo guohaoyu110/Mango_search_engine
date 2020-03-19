@@ -1,7 +1,7 @@
 '''
  created by Haoyu Guo
 '''
-
+# 之前的交互只是一个终端版本，所以此节的目的是利用Sanic编写一个web服务端界面进行交互。
 import asyncio
 import pymongo
 
