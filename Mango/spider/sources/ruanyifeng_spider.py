@@ -85,6 +85,7 @@ class BlogSpider(Spider):
             self.logger.exception(e)
 def main():
     BlogSpider.start(middleware=middleware)
+
 if __name__ == '__main__':
     main()
 
